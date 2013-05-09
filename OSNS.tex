@@ -1,0 +1,306 @@
+\section{COMP30017:Operating Systems and Network Services}
+\subsection{L1-L4}
+\subsubsection{Internet and WWW}
+\begin{compactitem}
+\item The \dw{internet} consists of millions of connected computing devices connected together by \dw{communication links}: fiber, copper, radio, wireless, satellite. It is not a network but rather a network of networks.
+\item The \dw{bandwidth} is the transmission rate.
+\item \dw{Hosts} are end systems, running network applications. \question{What is the difference between client hosts or server hosts}.
+\item \dw{Routers}: forward packets (chunks of data)
+\item \dw{Protocols} control the sending and receiving of messages
+e.g., TCP, IP, HTTP, Ethernet
+\item \dw{Internet standards}: 
+\dw{RFC}: Request for comments,
+\dw{IETF}: Internet Engineering Task Force
+\item The \dw{WWW} is a distributed system that runs on top of the internet.
+\item A \dw{network service} is installed on one or more servers to provide shared resources to client computers.
+\end{compactitem}
+
+
+\subsection{Requests/Replies in a Client-Server Model}
+images 12-17
+\subsubsection{Socket Programming}
+When sending message from one process to another, the message must
+traverse the underlying network. A process sends and receives through a
+\dw{socket} – in essence, the doorway leading in/out of the “application”. A socket is not a hardware interface. It is just software to software.
+
+\subsubsection{Main functions of an operating system}
+The OS manages the relationship between the software and the physical resources (hardware) . In doing so the OS provides a higher level interface for the software to interact with the hardware, providing the general services and handling the complexitiy of the issues itself. The OS may be able to provide extensions to make some of the physical services more useful for example:
+\begin{compactitem}
+\item the CPU scheduler provides the illusion that multiple programs can be
+run on one CPU at the same time,
+\item virtual memory provides an address space that is larger than the size
+of the physical memory, and
+\item the file system allows programmers to think in terms of files rather
+than sets of sectors on a disk. \end{compactitem}
+
+\subsection{Processes and Scheduling}
+A \dw{process} is a program in execution.
+A program is static; a process is dynamic. 
+The state of a process consists of the code or “text” of the program, the
+values of all the variables, both in memory and in registers, the address of
+the current instruction, and probably some other data as well (e.g. current
+directory). Processes have three segments: text (program), data (variables) and stack.
+
+\subsubsection{Multiprogramming}
+Conceptually each process has its own \dw{virtual CPU}. \dw{Multiprogramming} is how, in reality, multiple processes will share a CPU, each running for a small
+period of time in turn. Multiprogramming increases system efficiency, as things like IO operations can occur when the related process is not the process in control of the processor.
+\dw{Time-sharing} is multiprogramming with simultaneous terminal access to
+the machine by several users.
+
+D6,D7
+
+\subsubsection{The kernal}
+The \dw{kernal} is usually the priveligde part of the system managing and scheduling the interaction of software to hardware.
+The kernel also provides services such as “read N bytes from this file”.
+These services are used by application programs, utilities, and by the
+non-privileged parts of the operating system.
+The kernel is not itself a process.
+
+\paragraph{User-kernel distinction}
+Most CPUs have two modes (some have more). The \dw{program status word}
+(PSW) register gives the current mode. The \dw{mode bit} (PSW) provided by hardware. It provides the ability to
+distinguish when system is running user code or kernel code D2:10.
+Code running in \dw{user mode} cannot issue privileged instructions, and
+can access only the parts of memory allowed it by kernel mode code.
+Code running in \dw{kernel mode} (also called system mode or supervisor
+mode) can issue all instructions, and can access all memory.
+
+The user mode / kernel mode distinction is the foundation needed by the
+kernel for the building of its \dw{security mechanisms}.
+
+\paragraph{System Calls}
+\dw{System calls} exist to allow user programs to ask the kernel to execute
+privileged instructions and access privileged memory locations on their
+behalf. Since the OS checks those requests before executing them, this
+scheme preserves \dw{system integrity and security}.
+To the application programmer, a \dw{system call} is a call to a privileged
+function.
+
+Typically system calls (OS independent list):
+\begin{compactitem}
+\item \dw{Process control}, eg. load/execute; create and terminate a process;
+get/set process attributes
+\item \dw{File managent} eg. create/delete/open/close/read from a file;
+get/set file attributes
+\item \dw{Device management} eg. request/release a device; read/write from a
+device
+\item \dw{Information maintenance} eg. get/set time or date
+\item \dw{Communication} eg. create/delete communication connections.
+\end{compactitem}
+
+D2:14
+
+\paragraph{UNIX CALLS}
+\begin{compactitem} 
+\item \e{fork()} creates a new process: a copy of itself?;
+\item \e{execve()} is used after a fork to replace one of the two processess virtual
+memory space with a new program;
+\item \e{exit()} terminates a process
+\end{compactitem}
+A parent may wait for a child process to terminate: \e{wait} provides the
+process id of a terminated child so that the parent can tell which child
+terminated; \e{wait3} allows the parent to collect performance statistics
+about the child
+
+\paragraph{Interupts}
+When a hardware device needs attention from the CPU, e.g. because it
+has finished carrying out its current command and is ready to receive its
+next command, it generates a signal to \dw{interrupt} the CPU.
+When an interrupt occurs, the CPU’s hardware takes the values in the the
+program counter and program status word registers (and, on some kinds of
+machines, the stack pointer register), and saves them in privileged memory
+locations reserved for this purpose.
+It then replaces them with new values.
+The replacement PSW will put the CPU into kernel mode. The
+replacement PC will cause execution to resume at the start of the
+interrupt handler, code that is part of the kernel.
+
+The \dw{interrupt handler} must
+save the rest of the status of the current process,
+service the interrupt,
+restore what it saved, and
+execute a return from interrupt or similar instruction to restore
+whatever the hardware saved when the interrupt occurred (i.e. the
+PC, the PSW and (on some kinds of machines) the SP).
+
+The \dw{interrupt vector} is an area of memory that contains replacements for
+the program counter, program status word and (on some kinds of
+machines) the stack pointer for use when an interrupt occurs. The address
+of the interrupt vector is wired into the CPU.
+The hardware interrupt signal specifies its source (i.e. what device
+generated it). The CPU hardware uses this information to select the
+proper entry in the interrupt vector. There is typically one such entry per
+device or class of devices.
+The interrupt vector should not be directly writeable by users, since a user
+writeable interrupt vector is a security risk.
+
+The PSW (process status word) contains the current IPL (interupt priority level). The CPU hardware doesn’t respond to
+a new interrupt unless the current IPL in the PSW is lower than the IPL of
+the interrupt.
+
+The list of priorites goes clock (vents don't reoccur), network (the distance poses an issue for effiecancy) and then other hardware.
+
+True interrupts come from hardware devices outside the CPU,
+\dw{pseudo-interrupts} from the CPU itself. One example is exceptions in code. Each type of pseudo-interrupt has its own entry in the interrupt vector.
+
+A system call instruction causes a \dw{synchronous exception} (or trap).
+Other sources of synchronous exceptions include: Divide by zero, Illegal
+instruction, Bus error (bad address, e.g. unaligned access); Segmentation
+Fault (address out of range); Page Fault (for illusion of infinite-sized
+memory)
+Interrupts are asynchronous (do not occur at the same time) exceptions. Examples include: timer, disk
+ready, network, etc.
+On a system call, exception, or interrupt, the hardware/OS enters kernel
+mode with interrupts disabled; saves PC, then jumps to appropriate
+handler in kernel.
+
+User programs execute in user mode, and cannot change to kernel mode
+without going through a system call.
+A system call executes in kernel mode, but its first task is to check
+whether the user is authorized to perform the requested operation. 
+Users cannot bypass the authorization check (e.g. by causing kernel mode
+execution to start after the check) because that requires the ability to
+modify either the interrupt vector or the code it points to, both of which
+are in privileged memory.
+
+\subsubsection{Process states}
+A process can be in one of three states.
+\begin{compactitem}
+\item Running Actually using the CPU.
+\item Ready Runnable; temporarily stopped to let another process run.
+\item Blocked Unable to run until some external event happens.
+\begin{compactitem}
+Usually there are separate states for each reason for blocking, e.g. waiting
+for terminal I/O, waiting for disk I/O etc.
+In a machine with N CPUs, up to N processes can be Running at once.
+
+The saved states of processes are stored in the kernel, in the \dw{process table} aka \dw{process control block}.
+This table has one slot for every process. Some typical fields in process
+table entries are; process id, process state, user id, start addresses and sizes of memory areas (code, data, stack), CPU time, priority, working directory, list of open files, space for saved copies of registers, etc.
+
+The interrupt handler changes the state of the current thread to ready
+before servicing the interrupt. Afterwards, it finds the highest priority
+ready thread, and restores its saved state.
+
+This thread may or may not be the one that was running before the
+interrupt. If it isn’t, the event is a \dw{context switch}, and we say the
+previously running thread was \dw{preempted}.
+Processes and threads are usually not aware of interrupts or context
+switches.
+
+\subsubsection{Processing Queues}
+Processes move from queue to queue as they change state. Scheduling
+decision have to made about which order to remove processes from queues.
+
+In scheduling we want fairness, throughput, minimum user wait time, minimum job turnaround time.
+\begin{compactitem}
+\item FCFS
+\item Shortest Job first
+\item Round Robin. The RR algorithm keeps a list of ready threads, and allocates to each thread a time interval or time slice called a quantum, that it is allowed to run. If a thread is still running at the end of its quantum, the CPU is given to another thread, and the old thread is put at the bakc of the queue. A \dw{short quantum} gives good respoonse time, poor throughput, a long quantum gives poor response time and good throughput.
+\item Selfish orund robin: better to give good service to some jobs than poor to all jobs. like RR but does not put new jobs in the ready queue until demand is "acceptably low".
+\item Priority scheduling: runs highest priority thread. absolute pirority is meangliess, relative priority is important.
+\item Multi-level feedback queue: Have N queues of threads. New threads start at priority 1 with quantum Q1. After exhausting their quantum at priority level i with quantum Qi , they
+are moved down to priority level i +1. One possibility for quantum Qi+1 is
+2Qi.
+\item subsystem scheduling: A single machine may run different classes of applications, which may
+require different scheduling algorithms: e.g. batch, time-sharing and
+real-time.
+\item Earliest deadline first: The earliest deadline first (EDF) algorithm says that the next job to run
+should be the one with the earliest deadline.
+
+\dw{Real-time} programs are usually divided into two classes: soft real-time and
+hard real-time.
+If something catastrophic is likely to happen if a job misses its deadline,
+the job is \dw{hard real-time}; otherwise, it is \dw{soft real-time}.
+Hard real-time programs typically run on dedicated computers.
+General purpose OSs support only soft real-time jobs, such as playing
+music and movies. A typical recent scheduler will give all real-time threads permanently
+higher priority than all non-real-time threads.
+
+Server concerns: want ot look at few threads as possiible at each invocation, should not be susceptible to tricks raising sucess priority.
+
+When insufficient main memory is available, some ready processes have to
+be kept on disk. Hence scheduling consists of two parts:
+deciding which processes should be in main memory, and
+deciding which of these should get the CPU.
+
+One useful result from queueing theory applies to multiprocessors. If you
+have more than one CPU, this theory says it is better to have a single
+queue, and have each CPU select from it, than have separate queues for
+each CPU.
+
+\subsubsection{threads}
+Some OSs provide similar functionality for sharing by dividing the notion of
+a process into two components: a thread, and a \dw{container} for the thread.
+\dw{Thread definition}: a sequential execution stream within the process
+(sometimes called a “lightweight process”). Threads are the basic unit of
+CPU utilization – including the program counter, register set and stack
+space.
+A process has one container but may have more than one thread, and each
+thread can perform computations (almost) independently of the other
+threads in the process.
+
+Threads share the CPU – only one thread can run at a time.
+
+For servicing system calls and exceptions, the system switches to a
+preallocated kernel stack in system space. There is one such stack per
+thread.
+For servicing interrupts, the system switches to a preallocated interrupt
+stack in system space. There is usually one such stack for the whole
+system, although there may be one per interrupt priority.
+
+Kernel level threads provide a one-to-one relationship (thread-to-process).
+The kernel maintains context information for the process and for individual
+threads within the process
+Advantages: threads from the same process can still run if one is blocked;
+can take advantage of multiple processors
+Disadvantage: overhead of creating kernel threads; a mode switch is
+required; less control over scheduling.
+
+User threads are managed by a user thread library; runs in the user space
+of a proces. They provide a many-to-one relationship (between
+threads-to-process).
+Advantages: mode switch not required; thread scheduling can be
+application specific
+Disadvantages: system calls block threads – if one thread blocks, the
+entire process blocks including all the other threads; cannot take
+advantage of multiprocessors.
+
+
+Some recent CPUs are multithreaded. In CPU design, this means that the
+CPU has room for the state of more than one thread.
+This way, if one thread doesn’t have anything to do (e.g. because it is
+waiting for a read from main memory, which can take 200 cycles), the
+CPU can switch to executing another thread.
+
+\subsection{Memory Management}
+\dw{swap space}: the part of the HD, that is used as overflow when your RAM is full. The kernal has the option to swap in/out processes. 
+
+As memory fills up, holes are created: known as \dw{external fragmentation}: the holes are outside any allocated region. To resolve this we could slide all process into one ocntiguous area: known as \dw{memory compaction}
+
+Several algorithms can be used to find free space for a process: 
+first fit, next fit, best fit, worst fit.
+
+the \dw{base register} points to the start of the memory image of a process. The hardware adds this value to every address generated before accessing memory. Thus virtual and physical addresses are differn't, program unawares. The limit register is the size from the base register: the amount of memory. the two give the \dw{address space}.
+
+Virtual memrory tricks programs into thinking they have contiguous space, and into thinking all that is in virtual memory is in real emmory. The \dw{memory management unit} translates virtual address to physical address at run time. The kernal may be able to bypass the MMU. The information required to do the mapping is recorded in a page table. Each process has its own virtual address space and thus its own page table.
+
+Physical address space: obvious. Virtual address space of a machine is the set of addresses that programs on that machine may generate. VAS > PAS.
+
+A \dw{paged system} divides virtual and physical AS into fixed size pages. The MMu maps from pages to pages. As the job of a physical page is to hold a virtual page, physical pages are also called page frames. \dw{Internal fragmentation} refers to how there may be wasted space within a region allocated to a process, as only intejer number of pages are assigned to a process.
+
+Both virtual and physical addresses have two parts: page number and offset within the page.
+
+page 24
+
+
+
+
+
+
+
+
+
+
+
+

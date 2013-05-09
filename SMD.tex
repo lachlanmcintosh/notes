@@ -1,0 +1,875 @@
+\section{Software Modelling and Design}
+\subsection{Subject buzzwords}
+\begin{compactitem}
+\item abstraction
+\item model
+\item client needs 
+\item constraints
+\item decomposition
+\item 
+\end{compactitem}
+
+\subsection{L1}
+\begin{compactitem}
+\item As a verb, \dw{to design} means to create or develop a plan for a product, structure, system, or component. As a noun, \dw{a design} is used for either the final plan or the result of implementing that plan. 
+
+\item \dw{Well designed products}
+\begin{compactitem}
+\item function well
+\item look good
+\end{compactitem}
+
+\item \dw{Abstraction} is used to supress details, to concetnrate and understand aspects of a system. \dw{Models} are used in design to aid in understaning, reaction, investigation and documentation replacement. 
+
+\item A \dw{static model} represents aspects of programs that do not
+change during program execution. 
+
+\item A \dw{dynamic model} represents what happens during program
+execution. 
+
+\item \dw{Software product design}: modelling start of the design, select features and functions, UI.
+
+\item \dw{Software engineering design}: how to implement the product.
+
+\item \dw{Software lifecycle}
+is a sequence of stages that a software
+system typically undergoes as it progresses from the initial
+concept through to retirement.
+\end{compactitem}
+
+\subsection{L2}
+\begin{compactitem}
+\item A \dw{software system}
+is a collection of programs that
+work together to solve a problem or satisfy a set of
+goals. 
+
+\item A \dw{software design} is the activity of specifying the
+nature and composiIon of software systems in
+order to ensure that client needs and desires as
+well as external constraints are satisfied.
+
+\item The
+\dw{Design Problem}
+is to develop a description of a
+system that can be implemented by the developers
+and, if implemented, will meet all of the requirements. The design will move us away from (incomlete) requirements. 
+
+\item \dw{Design Methods} are methods which take the requirements and return a solution to the design problem.
+
+\item \dw{Modelling} refers to developing representing objects in such a way to proceed to a solution.
+
+\item \dw{Decomposition} refers to repeatedly decomposing a comlex design into simple problems.
+
+\item \dw{Design Knowledge} 
+– A sequence of activities that systematically guides the development of a solution to a design problem.
+
+\item The \dw{generic system development life-cycle model} flows like
+\dw{RSSITM}: rss item: Requirements, System design, Software design, Implementation, Testing, Maintanance. "RoSS SIT Mate and devlop your life cycle model". 
+
+\item The \dw{Systems Engineering V-Model} LHS = CRsDsDAdD (concept,requirements, system design, software design, Arichitecture implementation, detailed design) to Realisation to TTTTTT (testing). \begin{R} The system engineering v-model is a crusading dad \end{R}
+
+\item \dw{Requirement Elicitation and Analysis} aims to identify the needs, features, functions and capabilities of the system.
+\item \dw{System Design} aims to address how the whole system – both hardware and software – is to be implemented.
+\item \dw{Software Design} aims to address how the software is to be implemented.
+\item \dw{Implementation} phase is traditionally described as programming. 
+\item \dw{Unit and System testing} aims to find faults (bugs) in the software and eliminate them.
+\item \dw{Maintenance} aims to incorporate updates and new features into a system as the needs and circumstances change. 
+\item \dw{Component design} aims to identify (model,abstract) the key sub-systems (decomposition) and establish a  framework (structure) for control flow between sub-systems and communication (interface) between sub-systems. 
+\item The \dw{data} in the system consists of persistant and temporary data.
+\item \bf{\dw{software architecture} is modelled using arrows to indicate dependancies, ovals to indicate activities, rectangles to indicate artefacts (such as requirements)}.
+\end{compactitem}
+
+
+\subsubsection{Design methods} 
+\begin{compactitem}
+\item \dw{Structured Methods}: notations, guidelines and often
+sets of activities that can be used to move from
+requirements to design.
+\item \dw{OO design methods} \begin{enumerate}
+\item Develop use-cases and domain class models to understand the problem domain. 
+\item Add design detail by extending or reifying the class models to evolve a design that can be implemented.
+\item Repeat step 2 until reach a model where all of the classes, interfaces, and control strategies are straightforward to implement
+\end{enumerate}
+\end{compactitem}
+
+\subsection{L3,L4: Design Methods: methods for solving the design problem}
+%Strategies and Methods – What are the strategies and methods by which we can develop solutions to design problems (getting from requirements (needs) to a model which will be realised (mechanisms will be found) as satisfying the requirements).
+
+\begin{compactitem} 
+\item \dw{Function oriented methods} aim to solve the design
+problem by analyzing functions. High level functions are progressivly decomposed into more detailed functions. Need to think about a mapping from input to output structures. Some system state, and the functions manipulate that system state. We start with the functional requirements of our system and decompose our funcitons into detailed and simple functions. When the funcitons are simple enough, we map the funcitons to  \dw{module structure}. The main aim to to transform the input strutures to output structures. 
+
+\item \dw{Functional design process}:
+\begin{compactitem}
+\item draw a context diagram: inputs and outputs (known as terminators).
+\item stepwise we choose one or more transformations of data to expand. Draw a data flow diagrams (arrows for data flows, circles for transformations, rectangles for sinks/sources of data, dotted lines for events, shapes for event transformations, data bases are represented with a line above and below). Ideally, we want to have high cohesion within transforms and low coupling between transforms. 
+\item identify flow boundaries
+\item identify behaivour of event transformations 
+\item identify input flows and output flows (from out/in of the system to in/out the system).
+\item define the data structures
+\end{compactitem}
+
+\item \dw{Data oriented methods} seek to solve the design
+problem by analyzing the required input and output data structures.The
+\begin{compactitem} 
+\item Form a system network using Jackson’s notation that
+models the problem domain. Notation used is a heirarchy of data structures. So it is a tree where siblings are before /after in some sequence, and children are composed data structures and parents are composing data structures. Drawn with lines and rectangles. Rectangles with an asterisk in them represent many iterations of that data structure.   
+\item Define and verify the data flow data structures
+\item Derive and verify the program structures
+\item Derive and verify the elementary operations
+\item Write the structure text and program text (write down the process/procedure of going from each data structure).
+\end{compactitem}
+
+\item \dw{Component oriented methods} seek to solve the
+design problem by analyzing related functions and data structures. For example ADT and information hiding is componant design. 
+\begin{compactitem}
+\item A
+software component
+is an independent unit, with well
+defined interfaces and dependencies. 
+\item Software components can be composed or deployed
+independently. 
+\item Component design is all about providing, developing and
+integrating components to form complete architectures.
+\item A key design issue is
+assuring
+levels of trust in
+component based design.
+\end{compactitem}
+
+\item \dw{Object oriented methods} seek to solve the design
+problem by developing a series of models transforming the design problem to a
+design. 
+\end{compactitem}
+
+\subsection{L5: Software Design Process and Modelling}
+\begin{compactitem}
+\item An \dw{Activity} is the action that a person or group undertakes to achieve a goal. 
+\item A \dw{Process}
+is a collection of
+related tasks
+or
+activities
+that are
+performed to get from a
+starting point
+to a
+defined end point
+to achieve
+a set of desired goals.
+\item UML Activity Diagrams
+are a UML tool for describing
+processes.
+
+\item A \dw{systems analysis process} describes:
+the collection of actitvities from the requirements stage to product delivery. This is commonly known as the  \dw{systems development lifecycle}. Two phases of activities are:
+\begin{compactitem}
+\item \dw{Analysis activities} or \dw{product analysis} deal with user interactions. Product design deals with what will be included. How are users going to interact. What will the product do?
+\item \dw{Design activities} or \dw{ engineering design} deal with system interactions (e.g. algorithms).
+\end{compactitem}
+
+\item The \dw{iterative model} Architecture - Design -Implementation -Testing -Analysis -Repeat (ADITA).
+The aim in an iterative
+model is to develop a
+minimal but
+usable
+system and then improve
+upon it over successive
+iterations. 
+Each individual
+iteration
+combines product design in the analysis
+activity, and product engineering in the design, implementation
+and testing activity.
+
+\item The \dw{rapid prototyping development process} is a form of
+iterative development. Each iteration focuses on the
+production of a
+Prototype.
+\begin{compactitem}
+\item A \dw{prototype}
+is an incomplete or preliminary version of
+the system from which the complete production system
+can be developed. 
+\item \dw{Prototyping} is where we create executable models of parts of the system.
+\end{compactitem}
+\item \dw{Non Executable and Executable Models}.
+Activity Diagrams
+appear to be executable because they have
+a clear execution like
+token passing
+semantics. 
+UML class diagrams are not executable – they just model the
+relationships between classes (the entities) in a system.
+
+\item A \dw{horizontal prototype} realizes part or all of a product’s user
+interface.
+\item A \dw{vertical prototype} does processing apart from that required
+to present a user interface.
+\begin{R} think in layers of the program. horizontal gives the top layer only, verticle cuts down through layers. \end{R}
+\item A \dw{throwaway prototype} is developed as a design aid and then
+discarded.
+\item An \dw{evolutionary prototype} is a prototype that becomes (part of)
+the final product. 
+
+\item The \dw{fidelity} of a prototype is how closely a prototype represents the final
+product it models.
+
+Some uses of prototypes are:
+\begin{compactitem}
+\item \dw{Needs elicitation}.
+Basis for discussion, jogs memory, inspires ideas.
+Usually throwaway horizontal paper prototypes.
+\item \dw{Needs analysis}. Captures developers understanding of needs.
+Usually throwaway horizontal prototypes at various levels of fidelity.
+\item \dw{Requirements generation and refinement}.
+Design alternatives.
+Explore new ideas.
+\item \dw{Requirements evaluation and selection}
+Usability studies
+Requirements feasibility
+Usually higher fidelity; someLmes verLcal prototypes
+\item \dw{Design finalization}
+\end{compactitem}
+
+Some prototype risks/issues are \begin{compactitem}
+\item Using a throwaway prototype as the basis for development
+\item Fixation on appearance rather than function
+\item Prototype is “better” than the final product
+\item Advisable to make high fidelity evolutionary horizontal
+prototypes
+\end{compactitem}
+
+
+\item \dw{UML}
+uses
+\dw{activity diagrams}
+to model processes (decisions,states, data, flow). 
+\begin{compactitem}
+\item The \dw{nodes} of activity graphs represent activities or objects. 
+\item Activity \dw{edges} show control and data flow. 
+\item We may have merge and decision nodes (\dw{diamonds}) to place guards on data flow. 
+\item Join nodes and fork nodes are represented with \dw{thick lines}. 
+\item We use \dw{rounded rectangle} to represent activities, \item We use \dw{closed circle} for a starting node
+\item A\dw{closed encircled circle} for end node. 
+\item Execution is modeled by
+\dw{tokens}
+that are produced by action
+nodes, travel over action edges, and are consumed by action
+nodes. 
+\item Activities can be grouped into activity partions known as \dw{swim lanes} (represented as rectangles enclosing group actions) to
+denote the person/subsystem/object that implements it.
+Transitions may cross swim lanes.
+
+\item Object nodes
+represent data and are
+represented by \dw{rectangles}. The
+state of the data/object is represented by within square
+brackets inside the rectangle.
+
+\item The lines can go between activity and object nodes and represent control and data flows.
+
+\item A
+pin
+is a \dw{square} attached to an action node to represent
+data – an alternative way to represesent flow.
+
+\item \dw{Activity parameters} are object nodes placed on activity
+symbol boundaries to indicate data or object inputs or
+outputs.
+Activity parameter types are specified in the activity
+symbol beneath the activity name.
+\end{compactitem}
+
+
+\item Name activities and actions with \dw{verb phrases}.
+Name object nodes with \dw{noun phrases}.
+
+\item Use the [else] guard at every branch.
+\end{compactitem}
+
+
+
+
+
+
+
+
+
+
+\subsection{L6: Use case analysis: a product design model}
+\begin{compactitem}
+\item Each activity is not atomic, that is, it can be divided up into a sequence of \dw{actions}.
+\item \dw{Use Case Models}
+model the interactions (actions) that an
+external entity (an actor) has with the system. Each actor in a use case must require one of the steps.
+
+\item A Use Case Model consists of two sub-models
+\begin{compactitem}
+\item \dw{Use Case Diagrams}:
+This is a
+static model
+that
+captures the users’ interaction (or other actors) with the system
+\item \dw{Use Case Descriptions}:
+This is a
+dynamic model
+that captures the users’ interaction with the
+system 
+\item 
+\end{compactitem}
+\item An
+\dw{actor}
+is a type of agent, or external en<ty, that interacts
+with a product. Actors are roles not individuals; the product is
+never
+an
+actor.
+
+\item {Use case diagram symbols} a stick figure for a actor, a line for an association and a oval for a use case (interaction).
+
+\item Designers can use a collection of \dw{scenarios}/ \dw{event lists} to explore ideas
+about the product and how the product could be designed
+for the way it will be used
+The scenarios are then analyzed to generate use cases by
+identifying actors, and the sequence of ac<ons that must be
+taken during an interac<on to achieve the goals of an
+activity. 
+
+\item A
+\dw{Beneficiary}
+of a use case is an actor that receives some benefit
+from the use case. If there are
+no
+beneficiaries of a use case then
+we must ques<on if the use case is 
+
+\item A
+use case
+or
+\dw{actor brief}
+is a short description of a use
+case or an actor. 
+
+\item Every use case diagram must have
+\begin{compactitem}
+\item At least one use case
+\item At least one actor
+\item At least one actor associated with each use case
+\item At least one use case associated with each actor
+\item No association line between actors
+\item No association line between use cases
+\item Name every actor and use case
+\item No label on any association line
+\end{compactitem}
+
+\item Name actors with \dw{noun phrases}.
+Name use cases with \dw{verb phrases}. Make use cases of uniform size and complexity. Each use case should \dw{realise a user goal} (not the steps to achieve such a goal).
+
+\item A
+use case description
+is a specificacton of the interaction (including order) between
+the actors and the system in a use case. It is a dynamic model. Use case descriptions must contain \dw{NASPPTEF}
+\begin{compactitem}
+\item A name/number
+\item Actors
+\item Stakeholders and the goals: given by the requirements.
+\item pre-codnitions: prerequisities for use cases to occur.
+\item post-conditions: assertion of what must be true at the end of a use case satisfying a stakeholder goal
+\item triggers begining use cases
+\item basic flow of actions between use cases and actors
+\item Extensions: explain the problem and write "and the use case ends". Extensions use a special numbering scheme:
+\begin{compactitem}
+\item Numbers are for ac<on step sequencing;
+\item LeHers are for extension triggers;
+\item Extension iden<fiers have interleaved numbers and leHers;
+\item An asterisk refers to all ac<on steps;
+\item A dash is used for ranges of ac<on steps;
+\item A comma separates ac<on steps
+\end{compactitem}
+\end{compactitem}
+
+\item A
+\dw{use case model}
+is a use
+case diagram
+together with a
+use
+case description
+for each use case in the diagram.
+Descriptions are dynamic and diagrams are static.
+
+\item Use case diagrams can show different types of relationships between use cases and actors:
+\begin{compactitem}
+\item Generalization between use cases
+\item Generalization between actors
+\item Inclusion
+relationships between use cases
+\item Extension
+relationships between use cases
+\end{compactitem}
+Generalizations are represented with block arrows and filled lines, inclsions and extensions are dotted lines with arrows.
+
+\item \dw{UML Structure}
+\begin{compactitem}
+\item \dw{Class diagrams} – are used to describe the entities within the system and the relationships between them.
+\item \dw{Component diagrams} – are used to show how collections of entities are related to other collections of entities. SO ARE COMPONENT DIAGRAMS THE SOFTWARE VERION OF CLASS?
+\end{compactitem}
+\item \dw{UML Dynamics}
+\begin{compactitem}
+\item \dw{Activity diagrams} – are used to describe processes and the flow of control and data in a process.
+\item \dw{State charts} – are used to describe the states of a system and how the system responds to events by making
+transitions from one state to another
+\end{compactitem}
+\item \dw{UML Interactions}
+\dw{Interaction diagrams} are
+\begin{compactitem}
+\item \dw{Sequence diagrams} and
+\item \dw{Collaboration diagrams}
+\end{compactitem}
+\end{compactitem}
+
+
+
+
+
+
+
+
+
+
+
+\subsection{L7: Domain class models}
+\begin{compactitem}
+\item A \dw{Class /Object model} is a representation of the classes and objects in a system. 
+In object-oriented modeling the world is made up of objects and the relationships between them. The task for the modeler is to identify 
+\begin{compactitem}
+\item objects, 
+\item object classes and 
+\item the relationships between them.
+\end{compactitem}
+\item UML Class/Object diagrams are graphical forms of class/object models.
+\item Other forms of model representation are possible, such as CRC cards.
+\item Types of class models include: 
+\begin{compactitem}
+\item \dw{Domain or conceptual models} - Important entities or concepts in the problem, their attributes, important relationships
+
+\item \dw{Design class models} - Classes in a software system, attributes, operations, associations, but no implementation details
+
+\item \dw{Implementation class models} - Classes in a software system with implementation details
+\end{compactitem}
+Domain models represent the problem; design and implementation models represent the solution.
+\item The units of a class model are 
+\begin{compactitem} 
+\item An \dw{object} is an entity that has a well defined boundary and has its own unique identity.
+Objects hold data and exhibit behavior. Objects encapsulate both state and behaivour. Each object has identity that distinguishses it from other objects. Objects may change their attributes over time.
+\item A \dw{class} is an abstraction of a set of objects with common operations and attributes. Every object is an instance of some class.
+\item An \dw{attribute} is a data item held by an object or class. Attributes hold the data values that describe objects. 
+An operation is an object or class behavior. Operations can change the attributes of an object.
+\item An \dw{association} is a relationship between classes. Associations  represent a relation on the sets of instances of each of the participating classes.
+\end{compactitem}
+\item \dw{UML class notation}:
+\begin{compactitem}
+\item A \dw{class} is given by a rectangle of layers: Name, attributes (empty/default), methods, exceptions
+\item A \dw{object} is an example of an object. The name is given as ObjectName: ClassName, object name OR class name may be suppressed. Attributes may be given with specific values, and may be supressed. Methods and exceptions are left off always and are only drawn in a class diagram.
+\item For \dw{attributes} "name : type [ multiplicity ] = initial-value". The initial value may be supressed. \e{: type} may be supressed. Multipliicty describes the number of values stored in the attribute Can use ranges n..k, numbers, ',', '*' for many, 1 for one instance and may be supressed. In object diagrams, attributes only have a name and initial value and may be supressed entirely. 
+\item For \dw{operations} name( parameter-list ) : return-type-list. The param-list is a list of "param-name:param-type = defualt value"
+\item \dw{Associations} exist between objects and between classes and between objects. 
+\begin{compactitem}
+\item \dw{Generalisation}, or inheritance, relationships exist between a general thing and a more specific or specialised thing. Represented wiht an open arrow from child to parent. 
+\item \dw{Aggregation} is an association which relates parts to their whole. Represented with open diamond going from part to whole. 
+\end{compactitem}
+Associations are another kind of structural relationship where given an object in one class to an object in another class.
+Associations should include direction arrows, and the roles of the classes within the associaiton above the line, and the multiplicity below the line.
+\item \begin{R} You cna remember which way the arrow goes by thinking action from: for example included from which is equivolant to aggregates from, extends from which is equivolant to generalises from. \end{R}
+\item Object Links show that particular objects participate in a relation between sets of objects and are often instances of class associations. Shown using a link line with no arrowheads and an underlined association name without multiplicities. Object diagrams show the state of one or more objects at a specific moment during execution and are thus dynamic models.
+
+
+\end{compactitem}
+
+\item Class diagram heuristics
+\begin{compactitem}
+\item Name classes, attributes, and roles with noun phrases.
+\item Name operations and associations with verb phrases.
+\item Capitalize class names only.
+\item Center class and compartment names but left-justify other compartment contents.
+\item Prefer association names to role-names.
+\item Place association names, role-names and multiplicities on opposite sides of a line.
+\end{compactitem}
+
+\item Class diagrams are a static modelling tool
+\item In \dw{product design} class diagrams are used to understand the entities in the problem domain and the relationships between them.
+\item In \dw{product engineering} class diagrams are used to show how the solution to a problem will be represented on a machine. 
+\item Object diagrams are static diagrams showing the relationships between objects. 
+
+
+\item A \dw{domain (conceptual) model} is a static model of the important entities in a problem,  their responsibilities, attributes, the important relationships among them,  and their behaviours.
+Conceptual models are about real-world entities in the problem domain and not about software.
+
+\item A domain class diagram details the concepts: excluding the notinos of software
+\item A Design class diagram gets tot the specifics of the software implementation.
+\item Domain class models are made from domain conceptual models. Implementaion models are made from domain class models. Domain models represent the problem, class and implementation models the solution. 
+\end{compactitem}
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{8: Interaction Diagrams}
+\begin{compactitem}
+\item The \dw{domain class model} is a static model of a system – it describes the objects, classes and how they are related to each other. 
+\item A \dw{class diagram} does not show how classes collaborate to achieve a system function or a goal of the system.
+\item An \dw{interaction diagram} is a notation for modeling the communication behavior of individuals exchanging information to accomplish some task.
+\item UML supports four different types of interaction diagrams.
+
+\begin{compactitem}
+\item \dw{Sequence diagram}: shows how individuals interact by showing the individuals along the top of the page and message exchange down the page. 
+\begin{compactitem}
+\item A \dw{frame} is a rectangle with a pentagon in the upper left-hand corner called the name compartment: "sd interactionIdentifier". 
+"interactionIdentifier" is either a simple name or an operation specification as in a class diagram. It has the format "name [selector] : typeName", name for simple name, slector for picking an individual from a collection, typeName for the type of the individual. Eithor or tpyeName or name must appear. 
+\item Objects are stated horizontally in the box, time is depicted vertically top to bottom. Each object has a box with a name, a dotted line underneath (indicating lifeline), a sqaure rectangle below that (indicating activation) follwed again by a dotted line and perhaps an end (indicated with an \e{X}. 
+\item \dw{Self} is used (as the name?) when the interaction described is “owned” by one of the interacting individuals. 
+\item Messages between objects are depicted with arows:
+
+\begin{compactitem}
+\item \dw{Synchoronous}: where the sender suspnds execution until the message is complete (use a solid arrow with a filled head)
+\item \dw{Asynchonous}: where the sender continues execution after sending the message (use a solid line with a two line arrow).
+\item \dw{Synchoronous message return} or \dw{instance createion} (use dotted line with two line arrow).
+\item The \dw{message specification format} is \e{variable = name argumentList}, variable is the simple name of a variable assigned a result, name is the simple name of the message, argumentList is the comma separated list of arguments in parentheses: \e{(varName = paramName = argumentValue,…)}
+\end{compactitem}
+\item An operation is \dw{executing} when some process is running its code.
+\item An operation is \dw{suspended} when it sends a synchronous message and is waiting for it to return.
+\item An operation is \dw{active} when it is executing or suspended.
+\item The period when an object is active can be shown using an execution occurrence. Thin rectangle over lifeline dashed line.
+\item An \dw{interaction fragment} is a marked part of an interaction specification that shows
+\begin{compactitem} 
+\item Branching
+\item Loops
+\item Concurrent execution
+\end{compactitem}
+It is surrounded by a rectangular frame with a pentagonal operation component and has dashed horizontal lines forming regions holding operands.
+\item An \dw{optional fragment} is a portion of interaction that may be done: a conditional statement, only a single operand with a guard. Write \e{opt} in the pentagon.
+\item A guard is a Boolean expression in square brackets in a format not specified by UML. \e{[else]} is a special guard true if every guard in a fragment is false.
+\item An \dw{alternative fragment} is combined with one or more guarded operands whose guards are mutually exclusive (write \e{alt} in the polygon).
+\item A break fragment is a combined fragment where the operand is executed in place of the remainder of the enclosing operand, or diagram, if the guard is true. 
+\item A \dw{loop fragment} has an operator of the form \e{loop(min, max)}. The loop body is performed at least min times and at most max times. If the loop body has been performed at least min times but less than max times, it is performed only if the guard is true. Either can be \e{*}. If min is specified but max is not, then min=max. If the loop has no parameters, then min=0 and max is unlimited. The default value of the guard is true.
+\item \dw{Sequence diagram heuristics}
+\begin{compactitem}
+\item Put the sender of the ﬁrst message leftmost.
+\item Put pairs of individuals that interact heavily next to one another.
+\item Position individuals to make message arrows as short as possible.
+\item Position individuals to make message arrows go from left to right.
+\item Put the self lifeline leftmost.
+\item In a sequence diagram modeling an operation interaction, draw the self execution occurrence from the top to the bottom of the diagram.
+\item Name individuals only if they are message arguments or are used in expressions.
+\item Choose a level of abstraction for the sequence diagram.
+\item Suppress messages individuals send to themselves unless they generate messages to other individuals.
+\item Suppress return arrows when using execution occurrences.
+\item Don’t assign values to message parameters by name. 
+\end{compactitem}
+\end{compactitem}
+\item \dw{Component and interaction co-design}
+\begin{compactitem}
+\item Components and Interactions are refined together during mid-level design.
+\item Components cannot be designed alone because they may not support needed interactions.
+\item Interactions cannot be designed alone because they may rely on missing features of components or missing components.
+\item Components and interactions must be designed together iteratively.
+\end{compactitem}
+\item component design heuristics: ouside in design
+\begin{compactitem}
+\item Interaction design should be mainly top-down - from most abstract to least abstract interactions.
+\item The most abstract interactions are specified in the product design use case models and in the requirements specification.
+\item Starting with the interactions between the program and its environment (outside) and designing how interacting components can implement them (inside) is called outside-in design.
+\item Patterns of interaction are important in the design of larger software systems. 
+\item Different patterns of interaction yield different designs. When you are creating an interaction diagram, you will often need to also choose a “control style”.
+\item A \dw{controller} is a program component that makes decisions and directs other components.
+\item A \dw{control style} is a way that decision making is distributed among program components.
+\begin{compactitem}
+\item \dw{Centralized}: A few controllers make all significant decisions. Easy to find where decision are made, but become large and complex. Increases coupling and destroys information hiding.
+
+Heuristics:
+\begin{compactitem}
+\item Avoid interaction designs where most messages originate from a single component.
+\item Keep components small.
+\item Make sure operational responsibilities are not all assigned to just a few components.
+\item Make sure operational responsibilities are consistent with data responsibilities.
+\end{compactitem}
+
+\item \dw{Delegated}:  Decision making is distributed through the program with a few controllers making the main decisions. Reduces doupling, information hiding is better, programs are easier to divide in layers. Delegated control is the preferred control style.
+\item \dw{Dispersed}: Decision making is spread widely through the program with few or no components making decisions on their own. Dispersed style is characterised by having many components holding little data and having few responsibilities. Components are unable to do much on there own: increasing coupling. Hard to hide information. Cohesion is usually poor. Avoid interactions that require each component to send many messages. 
+\end{compactitem}
+
+\item The \dw{Principle of Least Knowledge}, sometimes called the law of Demeter, is a design guideline (especially for Object Oriented programs) that states:
+\begin{compactitem}
+\item Each unit should have only limited knowledge of other units and only units closely related to this unit;
+\item Each unit should only communicate with its directly related units (“friends”) and not unrelated units (“strangers”).
+\end{compactitem}
+The  principle of least knowledge is closely related to the idea of “loose coupling”. 
+The fundamental idea is that an object should assume as little as possible about the structure or properties of any other unit in the system.
+For objet design this means that:  an operation of an object obj should send messages only  to the following entities:
+The object obj;
+The attributes of obj;
+The arguments of the operation;
+The elements of a collection that is an argument of the operation or an attribute of obj;
+Objects created by the operation; and
+Global classes or objects. 
+
+Objects send messages only to objects "directly known" to them
+
+The Law of Demeter helps to
+Hide information,
+Keep coupling low,
+Keep cohesion high,
+Discourage an over-centralized control style, and
+Encourage a delegated control style.
+
+
+\item There is a continuum of control styles with centralized and dispersed on the ends and delegated in the middle.
+
+\item  Different levels of centralization may be more or less appropriate depending on the problem.
+
+\item The control heuristics are in tension.
+
+
+
+\end{compactitem}
+\subsection{RANDOM SHIT}
+
+
+The most abstract interactions are specified in the product design use case models and in the requirements specification.
+
+Starting with the interactions between the program and its environment (outside) and designing how interacting components can implement them (inside) is called outside-in design.
+
+
+
+
+
+
+
+
+\item \dw{Communication diagram}: shows messages exchanged in the  form of an object diagram
+\item \dw{Interaction overview} diagram: a kind of activity diagram whose nodes are sequence diagram fragments
+\item \dw{Timing diagram}: shows individual state changes over time
+\end{compactitem}
+\item 
+\end{compactitem}
+
+
+
+
+\begin{compactitem}
+\item Product design 
+\begin{compactitem}
+\item the design problem
+\item Activities, diagrams, processes
+\item use cases
+\end{compactitem}
+\item Class Models
+\begin{compactitem}
+\item interaction
+\end{compactitem}
+\item Product engineering
+\begin{compactitem}
+\item Software architecture
+\end{compactitem}
+\end{compactitem}
+
+
+classes via the noun technique
+associaition via the verb technique
+attributes vua the adjective technique
+
+
+brainstoming
+not allowed to reject ideas
+then disvuss the validity of ideas
+
+
+centralised control structure results in highly coupled objects
+if you want low coupling: it is required to use delegation of control.
+
+
+From the charter we obtian the requirements=Product Design, from this we obtai the Software Requirements Package which consists of requirements tests, models and use cases. 
+
+
+
+reliabiliyt measured in terms of number of nines.
+
+
+\subsection{9 Software Requirements Specifications}
+\begin{compactitem}
+\item A software product design process:
+
+Product idea $>$ Product design analyisis $>$ Product design Resoluiton $>$ SRS (Software requirements Specification) $>$ Engineering Design Analysis $>$ Engineering Design Resulution $>$ Design Document. 
+
+\item The input to the product design process is a \dw{project charter}, sometimes referred to as a project mission statement, business case document, or a project brief.
+The project charter defines the project goals and limits.
+Roles of the project charter are to:
+\begin{compactitem}
+\item Launching a development project
+\item Starting point for the software design problem
+\end{compactitem}
+The Project Charter consists of
+\begin{compactitem}
+\item Introduction 
+\item Product Vision and Scope
+\item What is the new system going to achieve, who will it benefit, and how will it benefit them, what will be new and different and how what are its boundaries?
+\item Target Markets
+Who will buy or use the product and why would they buy it?
+\item Stakeholders
+Who are the people or organizations that have a vested interest in the product and its outcomes.
+\item Assumptions and  Constraints
+\item What are the legal, regulation, project constraints.
+\item Business Requirements
+What are business functions that must be implemented in the system
+\end{compactitem}
+
+\item Activity models, use case models, domain models and interaction models take the project charter as input and can be used to resolve the Software requirements Specification. 
+
+\item The SRS has a wide audience and needs to be understood by  managers, developers, designers, testers, clients and other stake-holders.
+\item The SRS should be presented in a top-down fashion
+A high level project description that can be understood by a wide range of audiences
+Technical details, often targeted at the development team
+
+An typical SRS contains two kinds of information:
+Problem Statement:  product design problem based on the mission statement
+Product Design: records product design as software requirements
+
+\item Types of requirements:
+\begin{compactitem}
+\item \dw{Functional requirements}:
+Specify the externally observable behavior of the system.
+\item \dw{Non-functional requirements}:
+Specify constraints on the functions of the way in which they must be achieved. 
+These include requirements by development organization such as, portability, maintainability, and reusability
+\item \dw{Data requirements}
+These are requirements related to data input and output from the system, or stored by the system.
+\item \dw{Technical requirements} requirements can be classified into three categories based on the level of abstraction:
+\begin{compactitem}
+\item \dw{User-level requirements} are the most usual starting point for a requirements specification. 
+Most of the time directly maps to stakeholder goal or a product feature.
+\item \dw{Operational-level requirements} are statements about the product operations including inputs, outputs.
+\item \dw{Physical-level requirements} are details related to the protocols for interacting with the uses and other systems.
+\end{compactitem}
+\end{compactiem}
+
+\item A typical structuring of an SRS:
+\begin{compactitem}
+\item Product Description
+\begin{compactitem}
+\item Product vision
+\item Business requirements
+\item Users and other stakeholders
+\item Project scope
+\item Assumptions
+\item Constraints
+\end{compactitem}
+\item Functional Requirements
+\item Data Requirements
+\item Non-Functional Requirements
+\item Interface Requirements such as user interfaces, hardware interfaces, and software interfaces.
+\end{compactitem}
+
+
+\item Specification Notations include \dw{natural language} (easy to understand, prone to ambiguity), \dw{semi-formal language} (easy to understand and more precise), \dw{formal notation} (mathematical, precise, hard to understand). (HOWEVER i would argue that if you are 'understanding' something potentially ambiguous you are not understanding anything). 
+
+\item Stating requirements:
+\begin{compactitem}
+\item Write complete, simple sentences in the active voice.
+\item Define terms clearly and use them consistently.
+\item User the same word for a particular concept – that is avoid synonyms.
+\item Group related material into sections.
+\item Provide a table of contents and perhaps an index.
+\item User tables, lists, indentations, white spaces, and other formatting aids for clarity.
+\item phrasing should use "must" and "shall".
+\item Requirements should be written in a verifiable style. The ability to track requirements from their expression in the SRS to their realization in the engineering design, and their verification in reviews and tests is called \dw{requirements traceability}.
+\item The ability to isolate and identify requirements is critical for traceability. 
+\item Assigning a unique identifier to each requirement is the way of achieving traceability.
+\end{compactitem}
+
+\item Evaluating your product design spec.
+\begin{compactitem}
+\item Adequacy: to satisfy stakeholders needs, subject to constraints is better
+\item Beauty
+\item Economy
+\item Feasability
+\item Simplicity
+\end{compactitem}
+Such things canbe checked with prototypes.
+
+
+Modeling is useful throughout product design.
+Document problem domains
+Explore stakeholder needs and desires
+Test design constraints
+Detect misunderstandings, and incomplete or inconsistent specifications
+Generate design alternatives
+Evaluate and select design alternatives
+Record product designs
+
+
+\end{compactitem}
+
+\subsection{10: Software Architecture}
+\begin{compactitem} 
+\item \dw{Requirements Analysis} should yield a description of all the systems that would meet the client’s needs and only systems that would meet the client’s needs. 
+\item \dw{Design} should yield a description of exactly one system that will meet the client’s needs.
+\item The difference is in design decisions: requirements analysis should avoid making them, while design should not leave any significant design decisions open.
+\item A heirarchy of design problems:
+\begin{compactitem}
+\item Programming in the small – algorithms and data structures.
+\item Programming in the medium - object oriented design and implementation.
+\item Programming in the large - system design, large scale object oriented design.
+\end{compactitem}
+
+\item \dw{Software architecture} is :
+\begin{compactitem}
+\item Definition 1 (Pfleeger 2006)
+The software architecture associates the system capabilities identified in the requirements specification with the system components that will implement them. Components are usually modules and the architecture also describes the interconnections among them. In addition the architecture defines the operators that create systems from subsystems.
+\item Definition 2 (Pressman 2008) 
+Pressman asserts that in its simplest form, architecture is the hierarchical structure of program components (modules), the manner in which these components interact, and the structure
+\item Definition 3 (Fox 2006, pp227) 
+Architectural design is the activity of specifying the major parts; their responsibilities; properties and interfaces; and the relationships and interconnections between them. 
+\end{compactitem}
+
+\item The Role of Software architecture:
+\begin{compactitem}
+\item The architecture acts as a “blue-print" for the development of the system and provide the necessary schematic which developers can use to integrate their components.
+\item  The architecture can be used to assess the impact of changes, and provides the basis for evaluating extensions to the system and maintenance on the system.
+\item The architecture can be used to assess the impact of new, or additional, requirements on the system and the effect of changes to requirements.
+\item The architecture often has a major influence on project planning as each module or subsystem often maps naturally to tasks in the project plan.
+\end{compactitem}
+
+\item Choices in design: decomposition, platforms, concurrency, data-bases, control
+\item Characteristcis of software architectutre: user interfaces and interaction, netwoks, platforms, concurreny, reliability, performance, safety, modifiability and maintainability.
+
+\item In the systems design stage we use the analysis artifacts to develop design goals, software architecture, and boundary use cases. 
+
+\item Guidelines for good design:
+\begin{compactitem}
+\item \dw{Functional Independence} is a measure of how well separated modules of a system are. If the modules are well separated then making changes to one module does not effect the other modules. 
+Functional independence is ensured by \dw{high cohesion and low coupling}.
+
+\item \dw{Coupling (dependence)} is the degree to which a module relies on other modules. Low coupling usually implies a small interface through which a module interacts with other modules. 
+\item \dw{Cohesion} is a measure of how strongly-related and focused the various responsibilities of a software module are.
+\end{compactitem}
+
+\item A \dw{heirarchical decomposition} gives a sequence of layers, layers are ordered such that each subsystem depends only on the lower layers (lower dont know about above : \dw{principle of minimal knowledge}). An architecturre is called \dw{closed} is each leyer depends only on the layer below and \dw{open} otherwise.
+\end{compactitem}
+
+\subsection{11: Architectural Styles}
+\begin{compactitem}
+\item A \dw{software architecture} consists of system decomposition, persistant data, control flow and interaction, boundary conditions, inter-subsystems communications protocols.
+\item PAGE 7
+\end{compactitem}
+
+
+

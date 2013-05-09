@@ -1,0 +1,161 @@
+\section{ALGEBRA ANSWERS}
+\subsection{Chapter 1}
+\subsubsection{Excercise 1.1.3}
+Suppose that \e{$R$} is a ring and \e{$e_1,e_2\in R$} each satisfy \e{$\forall a \in R, e_ia=a=ae_i$}.
+
+Show that \e{$e_1=e_2$}
+Now this is obvious as since we have this relation holding for all \e{$a\in R$} it must also hold for when \e{$a=e_1$} or \e{$a=e_2$}. 
+Thus we have the relations \e{$e_1 e_2 = e_2 = e_2 e_1, e_2 =e_1 =e_1 e_2$} which clearly give \e{$e_1 = e_2$}.
+
+\subsubsection{Excercise 1.1.5}
+To show: "Let \e{$R$} be a ring in which there is a multiplicative identity. SHow that if the multiplicative and additive identities coincide, then \e{$R$} consists of a single element."
+
+Suppose that \e{$\exists a \in R$} s.t. \e{$a\not=0$} and thus \e{$a\not=1$}.
+
+Using the left distributive law: \e{$a(1+0)=a(1)+a(0)$} but also \e{$a(1+0)=a(0+0)=a(0)$}. Thus \e{$ a\times 1 +a \times 0 = a\times 0$}. Using the additive inverse property of rings: we have \e{$a\times 1= a = 0$}. But this is a contradiction! Thus there does not exist such an element \e{$a$} that is not \e{$0,1$}.
+
+\subsubsection{Excercise 1.1.7}
+\paragraph{i}
+To show \e{$0a=a0=0$}.
+Now We have from the left distributive property of rings that \e{$a(1+0)=a(1)+a(0)$} but we also know \e{$a(1+0)=a(1)=a$}. Thus 
+\e{\begin{align}
+a+a\times 0 &= a \\
+\implies (-a)+a+a\times 0 &= (-a)+a\\
+\implies a\times 0 &= 0
+\end{align}}
+And likewise for \e{$0a=0$}.
+
+\paragraph{ii}
+To show \e{$a(-b)=(-a)(b)=-(ab)$}. \\
+Now from the left distibutive property of rings, we have:
+$$\e{a \times (b+(-b))=a\times 0 = 0 \implies a \times b+a\times (-b)=0}$$
+Now from the definition of the additive inverse we recognize:
+$$\e{-(ab) = a(-b)}$$
+Also we see that $$\e{(a+(-a))b=0 \implies ab+(-a)b=0}$$
+Again from the definition of additive inverse we have
+$$\e{-(ab) = (-a)b}$$
+Thus $$\e{a(-b)=(-a)(b)=-(ab)}$$
+
+
+\paragraph{iii}
+To show: \e{$a(-b)=(-a)(b)=-(ab)$}.
+
+Now \e{\begin{align}
+0&=0\times 0\\
+&= (a+(-a))(b+(-b))\\
+&=(a+(-a))b+(a+(-a))(-b)\\
+&=ab+(-a)b+a(-b)+(-a)(-b)\\
+&=-(ab)+(-a)(-b)\\
+\implies ab&=ab+(-(ab))+(-a)(-b)\\
+&=(-a)(-b)
+\end{align}}
+
+\subsubsection{1.2.5}
+To show: "A unit cannot be a zero-divisor".
+A unit is an element s.t. it has some other element which can multiply to be 1. It has a multiplicative inverse. A zero divisor is just an element which has a mate that can multiply to be to zero. thus let our unit be \e{$a$} and we have 
+Suppose that we have some element \e{$a$} that is both a unit and a zero divisor. Thus 
+\e{$\exists b\in R$}, s.t.\e{$ ba=ab=1$}, from the definition of a unit. Also \e{$ \exists c\in R$}, s.t. \e{$ca=0$} OR \e{$ac=0$} s.t. \e{$a\not= 0$} and \e{$c\not= 0$}. 
+
+Now \e{$ac=0 \implies bac=b\times0 =0 \implies c=0$}, similarily, \e{$ca=0 \implies cab=0\times b \implies c = 0$}. But this is a contradiction as \e{$c$} cannot be zero!
+
+Thus a unit cannot be a zero divisor.
+
+\subsubsection{1.4.1}
+To show: the einsteinien intejers: \e{$\mathcal{Z}[\epsilon]=\{a+b\epsilon|a,b\in \mathcal{Z}\}$} form a ring.
+
+To show: the einsteinien intejers is \begin{itemize}
+\item an abelian group which is \begin{itemize}
+\item addition is associative
+\item addition is 
+\item the left and right distributive laws hold
+\item multiplication is accociative
+\begin{itemize}
+
+\subsubsection{1.4.2}
+Let $R$ be an integral domain such that $x^2 = x \forall x \in R$. Show that $R$ has exactly two elements. 
+
+From both the commutative law of multiplication and the fact that $R$ is unital we have that where $x$ is the multiplicative inverse of $y$, $xyx=xxy$. But since $x^2=x$ we also have, $xyx=x$ and $xxy=xy=1$ where x and y are not zero. Thus x=1 and so there are only tow elements: $0,1$ in this set.
+
+Actually this would work if it were a division ring. But it is not nessecarily.
+
+I can't see why this is true.
+
+\subsubsection{1.4.3}
+A unit is something that has a multiplicative inverse.
+In \e{$\mathca{Z}$} the only units are \e{$1,-1$}
+\DAM{SO what is \e{$\mathcal{Z}\times\mathcal{Z}$}?}
+In \e{$\mathcal{Z}_{5\mathcal{Z}}, 1,2,3,4$} are all units as \e{$1\times 1 = 1, 2 \times 3 = 3 \times 2 = 1, 4\times 4 =1$} by exhaustive search.
+In \e{$\mathcal{Z}_{4\mathcal{Z}},1,3$} are the units as \e{$1\times 1 = 1, and 3\times 3 = 3$} by exhaustive search.
+In \e{$\mathcal{Q}$} it is obvious that every element is a unit by the form: take \e{$a\in \mathcal{Q}$} then \e{$a$} non zero has the form of \e{$a_0\frac{a_1}{a_2}, \text{s.t. } a_1,a_2 \in \mathcal{N}, and a_0\in\{-1,1\}$}. Thus clearly the inverse of a is a_0a_0\frac{a_2}{a_1}. Therefore every rational number except zero is a unit.
+In \e{$\mathcal{R}[X]$} there is clearly no units for polynomials of order 1 or greater, as multiplication against anything other polynomial will not reduce the order to 0. Thus the only units are the set of real numbers.
+
+\subsubsection{1.4.4}
+\begin{enumerate}
+\item TRUE. Every field is by definition a ring.
+\item FALSE. Every ring does not have a multiplicative identity by definition. That is why we have the definitnio of unital.
+\item FALSE. Every ring with a multiplicative identity has the element 1 as the multiplicative identity, and also has the element 0 as the additive identity, by definition. However, if 1=0 is the only element, then the definitnio is still satisfied. As it is an abelian group (it is closed under addition, it has the additive inverse, it has the identity, addition is commutative), multiplication is still associative and left and right distributive laws hold and the multiplicative identity is an element.
+\item what are subfields?
+\item TRUE. Take the non-zero elements of a field to be the set $H$. Let's see if it is a group under multiplication. I can imagine the identity 1 still exists, that it is closed, that it is associative, that it is commutative.
+ \item TRUE. Addition is always commutative in a ring because it is so by definitno in an abelian group, and so, as a ring is nessecarily an abelian group addition is alwasy commutative.
+\end{itemize}
+
+\subsubsection{1.4.5}
+\BAM{WHAT?}
+
+\subsubsection{1.4.6}
+Determine all the units of \e{$\mathcal{Z}[i]$}. Here i assume that \e{$i=\sqrt{-1}$}. Now \e{$(a_0+a_1i)\times (b_0+b_1i) = (a_0b_0-a_1b_1)+(a_0b_1+a_1b_0)i$}. Thus we require \e{$a_0b_1+a_1b_0=0$} and \e{$a_0b_0-a_1b_1 = 1$} for units. So as we have 4 variables, let a be completely determined, and we can find its unit. 
+\BAM{SHOULD I GO FURTHER?}
+
+\subsubsection{2.3.2}
+Let R be a unital ring. Show that $R=I$ iff $I$ contains a unit from $R$.
+
+Suppose that $R$ is a unital ring, and $I$ contains a unit from $R$.
+
+\subsubsection{2.3.3}Show that a field has two ideals, namely $F$ and $\{0\}$.
+Clearly $F$ is an ideal of $F$. 
+
+Is $\{0\} = O$ an ideal:
+it is a non empty subset satisfying $\froall a,b \in O$ and $\forall c \in F$
+\begin{itemize}
+\item $a-b\in I$ as $0-0=0 \in O$
+\item $c\times a = c\times 0 = 0 \in O$ and $a\times c = 0\times c = 0 \in O$
+\end{itemize}
+Thus we know there are at least two ideals in $F$.
+
+Now suppose that we have another ideal call it $I$.
+Now it is obvious that there must be soe element of I not in O, call this $e$. 
+
+To show: $\exists e \in I \text{ s.t. } e \in I \not\implies I=F$.
+Now a field F is a commutative division ring.
+Also because I is an ideal we know that 
+\begin{itemize} 
+\item $e-e=0 \in I$
+\item As F is a commutative division ring, we know there exists some element $e_2 \in F$ s.t. $e\times e_2 = e_2 \times e = 1$ as every non-zero element is a unit in a division ring. Thus we know from the definition of an ideal that $1\in I$
+\item Now using the same property of ideals again we can see that $1\times r = r \in I, r\times 1 =r \in I, \forall r \in F$. Thus we know that $\forall r\in F, r\in I$. That is $F\subseteq I$ and we already knew $I \subseteq F$, thus $I=F$. CONTRADICTION
+
+Therefore there is no other ideals in $F$ other than $F$ and $\{0\}$.
+\subsubsection{2.3.3.b}
+Show that if a commutative unital ring has exactly two ideals, then it is a field.
+$I_1\triangleleft R,I_2\tirangleleft R$, s.t. $I_1\not=I_2$ and they are non-empty.
+What can we know about these two ideals?
+Well they are ideals of commutative unital rings, thus in $R$ \begin{itemize}
+\item multiplication is commutative
+\item there is some number $1$ s.t. $1\not=0$
+\item addition is closed
+\item there is the inverse for every number
+\item there is the identity 0 for addition
+\item addition is associative
+\tem addition is commutative
+\item multiplication is associative
+\item multiplication is distributive
+\end{itemize}
+
+Now consider $i_j \in I_j$. From the definition of ideals we know that $i_j-i_j = 0 \in I_j$. Thus both rings contain $0$.
+\BAM{CANT SEE FURTHER}
+
+\subsubsection{2.3.4}
+\BAM{NO IDEA}
+
+\subsection{Homomorphisms and Quotients}
+\subsubsection{3.0.2}
+It would seem not, because the obvious homomorphism ffo the unerlying group structure does not work for the second condition: namely \e{$\varphi x\mapsto 2x$}

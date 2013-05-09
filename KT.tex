@@ -1,0 +1,419 @@
+\section{Knowledge Technologies}
+\subsection{Introduction}
+%The purpose of the subject is to describe and apply fundamentals of knowledge systems, including data acquisition and aggregation, knowledge extraction, text retrieval, machine learning and data mining.
+%\dw{Knowledge technologies} refers to the way we can use computation to enhance our knowledge: stepping beyond the calculation of concrete tasks. Knowledge tasks are tasks dealing with irregular or unreliable data: for when the outcome is not well defined to enable us to mae decisions or inferences.
+%Computers do not nessecarily make decisions for us: rather they can medieate between us and data.
+%The data may be created for the task, or might be derived from the physical world – transformed, by a device, into bits from entities or events in our universe.
+%Consider effectiveness rather than correctness. (Can a document ranking possibly be “correct”?)
+%SOME GOOD TEXTS:
+
+\lstset{language=Java}
+
+\begin{compactitem}
+\item \dw{Rao Kotagiri}, Doug McDonelll Buiding Room 7.10
+kotagiri@unimelb.edu.au
+\item \dw{consultations}: 10:00am–11:00am Monday, 9.00-10.00 Wed
+\item \dw{data} for the subject is kept in the directory \e{/home/subjects/comp90049/local/} on the CSS servers.
+\item Christopher D. Manning, Prabhakar Raghavan, and Hinrich Schutze
+(2008), Information Retrieval, Cambridge University Press.
+Freely available at informationretrieval.org
+\item Pang-Ning Tan, Michael Steinbach and Vipin Kumar (2005)
+Introduction to Data Mining, Addison-Wesley.
+\end{compactitem}
+
+\subsection{String Search}
+
+\dw{Regular expressions} (regex, regexp) are patterns that match character
+strings. They can be thought of as describing a set of strings.
+\begin{compactitem}
+\item \dw{Search}: Find the strings in a file that contain a substring that
+matches a given pattern (grep family).
+\begin{lstlisting}
+> egrep 'rudd' *.txt
+> egrep 'col(o|ou)r' *.txt
+\end{lstlisting}
+\item \dw{Find and replace}: Substitute some new string for the matching
+substring in vi.
+\begin{lstlisting}
+s/rudd/gillard/g
+s/[dD]og/Canis lupis familiaris/g
+\end{lstlisting}
+\item \dw{Validate or test}: Check if new string is correct (awk, Python, Perl).
+\begin{lstlisting}
+$input ~ /gillard/
+$input ~ /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/
+\end{lstlisting}
+Here the operator \e{$\sim$} in the expression \e{input $\sim$ /string/},is
+a match operator that checks whether input contains the pattern
+\e{/string/}.
+\end{compactitem}
+
+The four main concepts of regex mirror the four types of structure in
+imperative programming languages.\begin{compactitem}
+\item \dw{Sequence}: i = 2; j = 3; 
+\item \dw{Matching}: /cat/
+\item \dw{Assignment}: i = 2; 
+\item \dw{Memoization}: (pattern)
+\item \dw{Selection}: if A: do thing else: do other thing; 
+\item \dw{Alternation}: /cat|dog/
+\item \dw{Repetition}: while True: i += 1; 
+\item \dw{Repetition}: /(cat)*/
+\end{compactitem}
+
+As the examples above show, regular expressions are a mix of literal
+characters and command or control characters. For example,
+\begin{compactitem}
+\item \e{a} means “match the character a”. 
+\item \e{$|$} means or
+\item \e{$ \{\{ \} [ ] ( )\ \textasciicircum{}\ \$ . | * + ? \} $} are known as \dw{metacharacters} and
+need to be escaped by a backslash (\e{$\backslash$}) to be used in a literal match. Beware, some tools have different metacharacters. And in some cases \e{$\backslash$} turns a character into a metacharacter.
+Here, we sometimes use \e{$/$} as a \dw{pattern delimiter}. In some tools, it too is
+a metacharacter.
+\item The \dw{wildcard} \e{.} is the most basic metacharacter. It matches any single character (except a newline):
+\item The \dw{anchors} \e{\textasciicircum{}} and \e{\$} match the start and end of a line or string,
+respectively.
+\item The \e{$|$} metacharacter expresses \dw{alternation} or \dw{disjunction}. 
+\begin{compactitem}
+\item \e{$/a|b|c/$} matches \e{“a”, “b”, or “c”}.
+\item \e{$/cat|dog/$} matches \e{“cat”} or \e{“dog”}.
+\end{compactitem}
+\item The precise number of characters to match may be unknown; instead,
+we specify a \dw{repetition construction}.
+Some repetitions involve an arbitrary number: \begin{compactitem}
+\item \e{*}: zero or more of the preceding element
+\item \e{?}: zero or one of the preceding element
+\item \e{+}: one or more of the preceding element
+\end{compactitem}
+These are \dw{greedy}: they match as many characters as they can. So \e{.*}
+will always match a complete string and \e{a.*b} will pick up the last \e{“b”} in
+the string.
+Sometimes we care, but only approximately, about number. \begin{compactitem}
+\item \e{\{n\}}: exactly n of the preceding element
+\item \e{\{m,n\}}: between m and n (inclusive) of the preceding element
+\item \e{\{n,\}}: n or more of the preceding element
+\item \e{\{,m\}}: up to m of the preceding element
+\end{compactitem}
+\item We can match a set of characters known as \dw{character classes}: \e{[0-9],[a-z],[A-Z],[A-Za-z],[aeiou]}, etc.
+Observe also that within \e{[]}, metacharacters may be used in their literal
+meaning. 
+\item A second use of the \e{\textasciicircum{}} metacharacter is to negate character classes.
+\e{/[\textasciicircum{}A-Za-z]/} matches any non-alpha character.
+\item Some character classes are used so frequently that they have names:
+\begin{compactitem}
+\item \begin{verbatim} [0-9] = [[:digit:]] = \d \end{verbatim}
+\item \begin{verbatim} [a-zA-Z0-9_] = [[:word:]] = \w \end{verbatim}
+\item \begin{verbatim} [\ \t\r\n\f] = [[:space:]] = \s \end{verbatim}
+\item \begin{verbatim} [^0-9] = \D \end{verbatim}
+\item \begin{verbatim} [^a-zA-Z0-9_] = \W \end{verbatim}
+\item \begin{verbatim} [^\ \t\r\n\f] = \S \end{verbatim}
+\end{compactitem}
+
+\item Placing a pattern in parentheses leads to the match being stored as a
+\dw{variable}.
+The first stored pattern has the name \e{$\backslash 1$}, the \e{n}th is \e{$\backslash n$}. 
+\end{compactitem}
+
+\subsubsection{Pythonic regex}
+The regex \e{"\"} clashes with the python use. TO overcome this you must write "\\" in place of "\". To avoid this, prefix thestring with the literal r"string".
+
+\begin{lstlisting} 
+*?, +?, ?? 
+\end{lstlisting}
+The \e{'*'}, \e{'+'}, and \e{'?'} qualifiers are all greedy; they match as much text as possible. Sometimes this behaviour isn’t desired; if the RE \e{$<.*>$} is matched against \e{$'<H1>title</H1>'$}, it will match the entire string, and not just \e{$'<H1>'$}. Adding \e{$'?'$} after the qualifier makes it perform the match in \dw{non-greedy} or \dw{minimal fashion}; as few characters as possible will be matched. Using \e{$.*?$} in the previous expression will match only \e{$'<H1>'$}.
+
+Likewise \e{$\{m,n\}?$} attempts to match the previous string with as few repitiions as possible.
+
+\begin{lstlisting}
+(...)
+\end{lstlisting}
+Matches whatever regular expression is inside the parentheses, and indicates the start and end of a group; the contents of a group can be retrieved after a match has been performed, and can be matched later in the string with the "\\number" special sequence
+
+
+\begin{lstlisting}
+(?P<name>...)
+\end{lstlisting}
+Similar to regular parentheses, but the substring matched by the group is accessible within the rest of the regular expression via the symbolic group name name. 
+
+\begin{lstlisting}
+(?P=name)
+\end{lstlisting}
+Matches whatever text was matched by the earlier group named name.
+
+\begin{lstlisting}
+(?#...)
+\end{lstlisting}
+A comment; the contents of the parentheses are simply ignored.
+\begin{lstlisting}
+(?=...)
+\end{lstlisting}
+Matches if ... matches next, but doesn’t consume any of the string. This is called a lookahead assertion. For example, Isaac (?=Asimov) will match 'Isaac ' only if it’s followed by 'Asimov'.
+
+
+\begin{lstlisting}
+(?!...)
+\end{lstlisting}
+Matches if ... doesn’t match next. This is a negative lookahead assertion. For example, Isaac (?!Asimov) will match 'Isaac ' only if it’s not followed by 'Asimov'.
+
+\begin{lstlisting} 
+(?<=...) and (?<!...)
+\end{lstlisting}
+Do the same as above but in the oposite direction.
+
+
+\begin{compactitem}
+\item \e{$\backslash A$} matches only at the start of the string.
+\item \e{$\backslash b$} matches the empty string, but only at the beginning or end of a word.
+\end{compactitem}
+
+There are more special caracters here http://docs.python.org/2/library/re.html 
+
+\begin{compactitem}
+\item re.compile(pattern, flags=0)
+Compile a regular expression pattern into a regular expression object
+\begin{lstlisting}
+prog = re.compile(pattern)
+result = prog.match(string)
+\end{lstlisting}
+is equivalent to
+\begin{lstlisting}
+result = re.match(pattern, string)
+\end{lstlisting}
+finsih at http://docs.python.org/2/library/re.html
+\end{compactitem}
+
+\subsection{Search Algorithms}
+
+\begin{A}[NAIVE MATCHING]
+Try to find the query \e{q} in the string \e{t}. 
+\begin{compactitem}
+\item Begining witht the first letter in \e{q}, move along \e{t} until you have a match.
+\item move to the next letter of \e{q}: if the next letter in \e{t} is not a match, go back to step one and move the first letter of \e{q} along again until another match is found.
+\end{compactitem}
+This method requires up to \e{$|q-1|$} comparisons for each of the \e{$|t|$} characters: thus complexity is \e{$|q-1||t|+1$}.
+\end{A}
+
+\begin{A}[Boyer-Moore matching]:
+\begin{compactitem}
+\item line the starts of the two words together. 
+\item compare the end of the strings, if there is a mismatch take the search string mismatch letter and see if it is in our query, if so, align the query forward to that, otherwise, skip the length of the query.
+\end{compactitem}
+\end{A}
+
+\subsection{Text Compression}
+When a common string is recognized and replaced by a code, the
+outcome is a \dw{codebook} and hopefully more compact text.
+A specific form of this “dictionary” approach is to look backwards for the
+most recent occurrence of the same string. Variations of this approach
+are the basis of the zip family of compression algorithms: the \dw{LZ family}.
+
+\begin{A}
+A simple take on \dw{LZ compression}: \begin{compactitem}
+\item Pretend that the alphabet is written to the left of the string.
+\item Encode each substring in the string by a pointer to the left to an
+occurrence of the same string (not nessecarily in the alphabet).
+\item Each pointer is a pair consisting of \e{d}: distance to the left and \e{l}:
+number of characters to copy.
+\end{compactitem}
+\end{A}
+
+Is it better to search for the longest
+match, or the nearest one?
+It can be formally shown that such problems cannot be optimally solved
+through local or greedy methods, discovery of the best solution involves trying every combination
+of possible substitutions. 
+
+LZ methods avoid the combinatorics altogether by using simple
+heuristics that are experimentally found to produce “good enough”
+solutions on typical data.
+\begin{A}
+The main heuristic is to do no search at all and instead \dw{build a
+dictionary of string substitutions} made so far.
+\begin{compactitem}
+\item The initial dictionary consists of all single letters.
+\item Only dictionary entries can be matched. The longest match is
+always taken.
+\item When a substitution such as ang is made in tangled, the entry
+angl is added to the dictionary.
+\end{compactitem}
+\end{A}
+
+Another heuristic is to allow a form of \dw{forward matching}, giving
+run-length encoding. For example,
+dogcatcatcatcatcatcatcatdog
+dogcat(3,18)dog.
+
+%Consolidate your understanding of the regular expression
+%metacharacters; some useful references:
+%docs.python.org/dev/howto/regex.html
+%java.sun.com/docs/books/tutorial/essential/regex/
+% Some readings:
+%en.wikipedia.org/wiki/Boyer-Moore_string_search_algorithm
+%en.wikipedia.org/wiki/Lempel-Ziv-Welch
+
+\subsection{Approximate Matching}
+Pattern Mmtching is ineffiecant for approximate matching, due to combinatorial complexity. 
+
+There is still no good way of doing context-related search.
+
+\subsubsection{Stemming}
+There are two kinds of dictionaries used in spelling correction.
+\begin{compactitem}
+\item \dw{Literal}: a set of strings that must be matched exactly.
+\item \dw{Root+stem}: a set of root words, a set of suffixes, and a set of rules
+for applying suffixes to roots.
+\end{compactitem}
+\dw{Stemming} is the process of stripping suffixes automatically. It allows a
+dictionary to be generalized, but many root-suffix combinations are not
+correct spellings.
+
+\subsubsection{Neighbourhood search}
+Given a query string that is not in the dictionary, the task is to find the
+\dw{nearest neighbours}. One approach is to generate all neighbours, and see if they are present by enumerating all of the single-character deletions, insertions, and
+replacements. This gives \e{$N_1 = n A\cdot (n+1)+(A-1)\cdot n$} nearest neighbours if we assume a distance of 1. If we assumed a distnce of 2, \e{$N_2 = N_1 + A(n+1)A(n+2) +A(n-1)A(n-2) + An^2 + \cdots $} which does not even include combinations of insertions and dletions, and is \e{$O(n^2)$}
+
+\subsubsection{Combinatoric search}
+Current practical techniques use variants of binary search, where:
+\begin{compactitem}
+\item Strings are sorted, that is, grouped by prefix.
+\item Strings are inspected character-by-character until it is clear that
+their distance from the query is greater than k.
+\item Due to the sorting, groups of strings that share a prefix can be
+considered simultaneously.
+\item The distance limit \e{k} must be chosen, or repeated search is required.
+\item Additional work is required for ranking.
+\item Because there is no sorting of a dictionary that ensures that similar
+strings are close together, it is still not obvious what the best solution to
+this search problem is.
+\end{compactitem}
+
+\subsubsection{Edit distances}
+Can be used to rate a match. The simplest edit distance is the number of insertions, deletions, and
+substitutions needed to turn one string into another. Gives a natural way of thinking about a ranking.
+
+Assume an array \e{F} of size \e{$|q|\times|t|$}, to be used to compute the global edit
+distance between \e{q} and \e{t}.
+\begin{lstlisting}
+lq = strlen(q); lt = strlen(t);
+for( i=0 ; i<=lq ; i++ ) F[i][0] = i;
+for( j=0 ; j<=lt ; j++ ) F[0][j] = j;
+
+for( i=1 ; i<=lq ; i++ )
+    for( j=1 ; j<=lt ; j++ )
+        F[i][j] = min3(
+            F[i-1][j] + 1, % insertion
+            F[i][j-1] + 1, % deletion
+            % match/miss match
+            F[i-1][j-1] + equal(q[i-1], t[j-1]));
+\end{lstlisting}
+The value \e{$F[lq][lt]$} is the minimum number of edits between between
+\e{$q$} and \e{$t$}. 
+
+The \dw{local edit distance} is similar.
+\begin{lstlisting}
+lq = strlen(q); lt = strlen(t);
+for( i=0 ; i<=lq ; i++ ) F[i][0] = 0;
+for( j=0 ; j<=lt ; j++ ) F[0][j] = 0;
+
+for( i=1 ; i<=lq ; i++ )
+    for( j=1 ; j<=lt ; j++ )
+        F[i][j] = max3(
+            F[i-1][j] - 1, % insertion
+            F[i][j-1] - 1, % deletion
+            % match/miss match
+            F[i-1][j-1] + equal(q[i-1], t[j-1]));
+\end{lstlisting}
+Here, equal() returns +1 if equal, �1 otherwise. 
+The value of F[i][j] with the highest value represents the best
+alignment.
+
+The alignment contributing to the maximum score can be reconstructed
+by tracing-back the pointers stored during the calculation.
+
+This process takes \e{$O(n^2)$}.
+
+\subsubsection{N-grams}
+Let \e{$G_n(s)$} be the substrings of length \e{$n$} of \e{$s$}. The \e{n}-gram distance of \e{t} and \e{s} is
+\e{$|G_n(s)| + |G_n(t)| -� 2\times|j_Gn(s)\cap\ _Gn(t|$}
+
+The smaller the \e{n}-gram distance, the closer the match. Cost is
+approximately \e{$O(|s| + |t|)$}, compared to \e{$O(|s|\times |t|)$} for an edit distance.
+
+\subsubsection{Phonetic matching}
+\dw{Phonetic matching} techniques allow searching for a name or word when
+the exact spelling is unknown.
+
+The \dw{Soundex} sound-alike matching technique is well-known, widely
+used, simple to implement.
+Transforms a string into a 4-character code that represents its sound:
+\begin{compactitem}
+\item Replace all but the first letter by one of seven single-digit codes:
+\e{$a e h i o u w y \to 0, b f p v \to 1,c g j k q s x z \to 2, d t \to 3,l \to 4, m n \to 5, r \to 6$}
+\item Remove doubles, then remove 0s.
+\item Truncate to four symbols.
+\end{compactitem}
+There are \e{$6994 =26(1 + 6 + 62 + 63) distinct Soundex codes.
+
+\subsubsection{editex}
+\dw{Zobel’s editex}: Like the standard edit distance, but instead of having a
+fixed penalty for insertion, deletion, and substitution, have two penalties:
+\begin{compactitem}
+\item High for letters that are never similar, such as “d” and “m”.
+\item Low for letters that can give rise to similar sound, such as “m”–“n”
+and “c”–“k”. We have 10 groupings:
+\e{1. a e i o u y 2. b p 3. c k q 4. d t 5. l r 6. f p v 7. s x z 8. c s z 9. m n 10. g j}.
+
+Every name has a pronunciation, or, more precisely, can be represented
+as a string of phonemes. Perhaps these can be used for matching in
+some way.
+Two problems:
+\begin{compactitem}
+\item Deciding what pronunciation corresponds to a given string.
+\item Comparing pronunciations.
+\end{compactitem}
+Phoenetic tables cna be used for similarity.
+
+\subsubsection{Effiecancy measurement}
+Measurement of efficiency is straightforward.
+But we also need to know whether the method is useful. Measurement
+of effectiveness involves human assessment of the quality of the results.
+
+\dw{Recall}: The proportion of the correct matches that are retrieved.
+
+\dw{Average precision} is defined as: \e{$AP=\frac{1}{R}\sum_{i=1}^d (\frac{r_i}{i}\cdot \sum_{j=1}^i r_j )$} where \e{$r_i$} is \e{$1$} (respectively, \e{$0$}) if the \e{$i$}th item in a ranking is relevant (respectively, irrelevant), there are \e{$d$} items in the ranking, and there are
+in total \e{$R$} known relevant items.
+
+We use \dw{baselines} to establish whether any proposed method is doing
+better than “dumb and simple” – “dumb” methods often work surprisingly
+well.
+
+\dw{Baseline} – naıve or straightforward method that we would expect a rich
+(or principled, or . . . ) method to better.
+\dw{Benchmark} – established “best practice” technique that we are pitching
+our method against.
+The word “baseline” is often used as an umbrella term for both
+meanings.
+
+\subsubsection{Readings}
+en.wikipedia.org/wiki/Bitap_algorithm
+en.wikipedia.org/wiki/Spell_checker
+www.googleguide.com/spelling_corrections.html
+“Learning a Spelling Error Model from Search Query Logs” (LMS).
+“Rank-Biased Precision for Measurement of Retrieval Effectiveness”
+(LMS), sections 2 & 3.
+“Phonetic String Matching: Lessons from Information Retrieval” (LMS).
+Manning et al., chapters 3 & 8.
+
+
+
+
+
+
+
+
+
+
+
+
+
+j
+

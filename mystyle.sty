@@ -1,0 +1,161 @@
+\ProvidesPackage{mystyle}
+%space formatting
+\AtBeginDocument{\setlength\abovedisplayskip{0pt}}
+\AtBeginDocument{\setlength\belowdisplayskip{0pt}}
+\AtBeginDocument{\setlength\abovedisplayshortskip{0pt}}
+\AtBeginDocument{\setlength\belowdisplayshortskip{0pt}}
+
+% Comment the following line to deny the usage of umlauts and other non-ASCII characters
+\usepackage[utf8]{inputenc}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}    % used to give the appropiate fonts for defining number sets. For example use \mathbb{R} for the set of real numbers.
+\usepackage{color}		% allows the use of colour in the document.
+\usepackage{titlesec}	% Allows the use rules to set headings as coloured.
+\usepackage{version}
+\usepackage{amssymb} 	%allows use of negated arrows
+
+\usepackage{graphicx}	% self explanatory: used for incorporating images.
+\usepackage{verbatim} %multi line comments
+
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+\showboxdepth=5 
+\showboxbreadth=5
+
+\sloppy
+
+\usepackage[margin=0.5in]{geometry}
+
+\usepackage{listings}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=1mm,
+  belowskip=1mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true
+  tabsize=3
+}
+
+\definecolor{Chapter}{rgb}{0,0,0.2}
+\definecolor{Section}{rgb}{0,0,0.2}
+\definecolor{Subsection}{rgb}{0,0,0.4}
+\definecolor{Subsubsection}{rgb}{0,0,0.4}
+
+\titleformat{\chapter}{\normalfont\Large\itshape}{Chapter}{1em}{}{}
+
+%\titleformat{\chapter}
+%{\color{Chapter}\Large\bfseries}
+%{\color{Chapter}\thesection}{1em}{}
+
+\titleformat{\section}
+{\color{Section}\normalfont\Large\bfseries}
+{\color{Section}\thesection}{1em}{}
+
+\titleformat{\subsection}
+{\color{Subsection}\normalfont\bfseries}
+{\color{Subsection}\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+{\color{Subsubsection}\normalfont}
+{\color{Subsubsection}\thesubsubsection}{1em}{}
+
+\definecolor{Equation}{rgb}{0.5,0,1}
+\definecolor{NewWord}{rgb}{1,0,0}
+\definecolor{Question}{rgb}{0,1,0}
+
+\newcommand{\e}{\textcolor{Equation}}
+\newcommand{\dw}{\textcolor{NewWord}}
+\newcommand{\question}{\textcolor{Question}}
+
+\definecolor{Definition}{rgb}{0,0.4,0}
+\definecolor{Theorem}{rgb}{0,0.4,0}
+\definecolor{Corollary}{rgb}{0,0.4,0}
+\definecolor{Proof}{rgb}{0.2,0.2,0.2}
+
+\newtheorem{T}{\color{Theorem}{Theorem}}
+\newtheorem{A}{\color{Theorem}{Algorithm}}
+\newtheorem{C}{\color{Corollary}{Corollary}}
+\newtheorem{Le}{\color{Corollary}{Lemma}}
+\newtheorem{Pp}{\color{Corollary}{Proposition}}
+\newtheorem{D}{\color{Definition}{Definition}}
+\newtheorem{R}{\color{Proof}{Remember}}
+\newtheorem{PP}{\color{Proof}{Proof}}
+
+\newcommand{\twopartdef}[4]
+{
+	\left\{
+		\begin{array}{ll}
+			#1 & \mbox{if } #2 \\
+			#3 & \mbox{if } #4
+		\end{array}
+	\right.
+}
+
+\newcommand{\threepartdef}[6]
+{
+	\left\{
+		\begin{array}{ll}
+			#1 & \mbox{if } #2 \\
+			#3 & \mbox{if } #4 \\
+			#5 & \mbox{if } #6
+		\end{array}
+	\right.
+}
+
+\abovedisplayskip=0cm
+\abovedisplayshortskip=-0cm
+\belowdisplayskip=0.7cm
+\belowdisplayshortskip=0.4cm
+\vspace{2cm}
+\itemsep=0cm
+
+
+\usepackage{paralist} % used to make compact lists with compactitem instead of itemize
+
+%\def \VB {\begin{verbatim}}
+%\def \VE {\end{verbatim}}
+
+%Some useful variables are
+%
+%Page Layout
+%\columnsep=3pt %: gap between columns
+%\topmargin=-80pt %: gap above header
+%\topskip: between header and text
+%\addtolength{\textheight}{15pt}%: height of main text
+%\addtolength{\textwidth}{15pt}%: width of text
+%\oddsidemargin=-50pt%: odd page left margin
+%\evensidemargin=-20pt% : even page left margin
+%Paragraphs
+%\parindent: indentation of paragraphs
+%\parskip=0pt%: gap between paragraphs
+%Floats (tables and figures)
+%\floatsep: space left between floats.
+%\textfloatsep: space between last top float or first bottom float and the text.
+%\intextsep : space left on top and bottom of an in-text float.
+%\dbltextfloatsep is \textfloatsep for 2 column output.
+%\dblfloatsep is \floatsep for 2 column output.
+%\abovecaptionskip-10pt%: space above caption
+%\belowcaptionskip: space below caption
+%Maths
+%\abovedisplayskip: space before maths
+%\belowdisplayskip: space after maths
+%\arraycolsep: gap between columns of an array
+%Lists
+\topsep=0pt %: space between first item and preceding paragraph.
+%\partopsep-15pt%: extra space added to \topsep when environment starts a new paragraph.
+%\itemsep: space between successive items.
+
+%\begin{array} {lcl} f(x) & = & (a+b)^2 \\ & = & a^2+2ab+b^2 \end{array}

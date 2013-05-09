@@ -1,0 +1,135 @@
+\section{Group Theory and Linear Algebra}
+You should be able to prove all theorems and write down all definitions of this document.
+\subsection{L1}
+\begin{compactitem}
+\item Define multiplication
+\item Define invertibility
+\item Define gcd
+\item Define order
+\end{compactitem}
+
+\subsection{L2} 
+\subsubsection{\e{$\mathbb{Z}$}: the intejers}
+\begin{D} We recognise the \dw{intejers} as \e{$\mathbb{Z} = \{\cdots, (-1)+(-1), (-1), 0, 1, 1+1, \cdots\}$} where \e{$(-1)+1 = 0$, $1+(-1)=0$, $0+1=1$, $0+(-1)=(-1)$, $1+0=1$, $(-1)+0=(-1)$ } \end{D}
+
+\begin{D}
+Let \e{$d\in\mathbb{Z}$}. The \dw{multiples} of \e{$d$} is \e{$d\mathbb{Z} = \{\cdots, (-d)+(-d), (-d), 0, d, d+d, \cdots\}$}. \end{D}
+
+\begin{D} The integer \e{$d$} \dw{divides} \e{$a$}; \e{$d/a$} if \e{$a\in d\mathbb{Z}$} \end{D}
+
+\begin{D} Let \e{$x,m \in \mathbb{Z}$}. The \dw{greatest common divisor} of \e{$x$} and \e{$m$}; denoted \e{$gcd(x,m)$} is \e{$d\in\mathbb{Z}_{>0}$} s.t. 
+\begin{compactitem}
+\item \e{$d/x$} and \e{$d/m$}
+\item If \e{$l\in\mathbb{Z}_{>0}$} and \e{$l/x$} and \e{$l/m$} then \e{$l/d$}.
+\end{compactitem}
+\end{D}
+
+\begin{D} Notions of \d{order}. Let \e{$a,b \in \mathbb{Z}$}. We define \begin{compactitem}
+\item \e{$a<b$} if there exists \e{$x\in\mathbb{Z}_{>0}$} s.t. \e{$a+x=b$};
+\item \e{$a\leq b$} if either \e{$a=b$} or \e{$a<b$}.
+\end{compactitem}
+\end{D}
+
+\begin{T}[Euclidean Algorithm] Let \e{$a,b\in\mathbb{Z}$}. There exist unique \e{$q,r \in \mathbb{Z}$} s.t. \begin{compactitem}
+\item \e{$a = bq +r$}
+\item \e{$0\leq r <|b|$}
+\end{compactitem}
+We can then write \e{$a=r (mod b)$}
+\end{T}
+
+\begin{T} Let \e{$x,m \in \mathbb{Z}$}. There exists \e{$l\mathbb{Z}$} s.t. \e{$l\mathbb{Z} = x\mathbb{Z}+m\mathbb{Z}$}. \end{T}
+
+\begin{T} Let \e{$l\in\mathbb{Z}_{>0}$} s.t. \e{$l\mathbb{Z} = x\mathbb{Z}+m\mathbb{Z}$}. Let \e{$d=gcd(x,m)$}. Then \e{$d=l$}. \end{T}
+
+%\begin{E} Prove the above three algorithms: see lecture notes. Note that proof of uniqeness, could be treated as an extension of proof of existance. \end{E}
+
+\begin{T}[Euclidean Algorithm] If \e{$a=bq+r$} with \e{$0\leq r<|b|$} then \e{$ gcd(a,b) = gcd(b,r)$} \end{T}
+
+
+\subsection{L3}
+\subsubsection{Equivolance relations}
+\begin{D} A \dw{set} is a collection of \dw{elements}. \end{D}
+\begin{D} Let \e{$S,T$} be sets. The \dw{product} of \e{$S$} and \e{$T$} is the set \e{$S\times T=\{(s,t)|s\in S, t\in T\}$} \end{D}
+
+\begin{D} Let \e{$S$} be a set. A \dw{relation} on \e{$S$} is a subset of \e{$S\times S$}. \end{D}
+
+Now \e{$<$} is a relation on \e{$\mathbb{Z}$}. \e{$a<b$} if there exists \e{$x\in\mathbb{Z}_{>0}$} s.t. \e{$a+x=b$}. \e{$a+b$} means \e{$(a,b)$} is in the relation \e{$<$}.
+
+\begin{D} The relation \e{$\sim$} is \dw{reflexive} if \e{$\sim$} satisfies: if \e{$s\in S$} then \e{$s\sim s$}. \end{D}
+\begin{D} The relation \e{$\sim$} is \dw{symmetric} if \e{$\sim$} satisfies: if \e{$s_1,s_2 \in S$} and \e{$s_1\sim s_2$} then \e{$s_2\sim s_1$}. \end{D}
+\begin{D} The relation \e{$\sim$} is \dw{transitive} if \e{$\sim$} satisfies: if \e{$s_1,s_2,s_3 \in S$} and \e{$s_1\sim s_2$} and \e{$s_2\sim s_3$} then \e{$s_1\sim s_3$} \end{D}
+
+\begin{D} An \dw{equivolance relation} on \e{$S$} is a relation on \e{$S$} that is reflexive, symmetric and transitive. \end{D}
+
+\begin{D} Let \e{$S$} be a set. Let \e{$\sim$} be an equivolance relation on \e{$S$}. Let \e{$s\in S$}. The \dw{equiovolance class} of s is the set \e{$ [s] = \{x\in S|x\sim s\}$} \end{D}
+
+\begin{D} Let \e{$S$} be a set. A \dw{partition} of \e{$S$} is a collection \e{$\mathbb{S}$} of subsets  s.t. \begin{compactitem}
+\item \e{$\bigcup_{y\in\mathbb{S}} y = S$}
+\item If \e{$x,y \in \mathbb{S}$} and \e{$x\not=y$} then \e{$x\cap y=\emptyset$}
+\end{compactitem}
+\end{D}
+
+\begin{T} Let \e{$m\in\mathbb{Z}$}. Then \e{$=mod m $} is an equivolance relation on \e{$\mathbb{Z}$} \end{T}
+
+
+\subsection{L4:Functions}
+Functions are for comparing sets. Let \e{$S$} and \e{$T$} be sets. A \dw{function} from\e{$S$} to \e{$T$} is a subset \e{$f$} of \e{$S\times T$}; \e{$f = \{(s,f(s))|s\in S\}$}, s.t. \begin{compactitem}
+\item If \e{$s\in S$} then there exists \e{$t\in T$} s.t. \e{$(s,t)\in f$}
+\item If \e{$s\in S$}, and \e{$t_1,t_2 \in T$} and \e{$(s,t_1),(s,t_2)\in f$} then \e{$t_1=t_2$}.\end{compactitem}
+
+The function \e{$f$} is an assignemnt assigning a mark \e{$f(s)$} from \e{$T$} to each \e{$s\in S$}; denoted \e{$f:S\to T$} or \e{$S\to^f T$}. 
+
+\begin{D} A function \e{$f:S\to T$} is \dw{injective} if it satisfies: if \e{$s_1,s_2\in S$} amd \e{$f(s_1)=f(s_2)$} then \e{$s_1=s_2$} \end{D}
+\begin{D} A function \e{$f:S\to T$} is \dw{surjective} if it satisfies: if \e{$t\in T$} then there exists \e{$s\in S$} s.t. \e{$f(s)=t$} \end{D}
+\begin{D} A funciton is \dw{bijective} if it is injective and surjective. \end{D}
+\begin{D} Let \e{$f:S\to T$} and \e{$g:S\to T$} be functions. The functions \e{$f$} and \e{$g$} are \dw{equal} if they satisfy is \e{$s\in S$} then \e{$f(s)=g(s)$} \end{D}
+\begin{D} Let \e{$f:S\to T$} and \e{$g:T\to U$} be functions. The \dw{composition} of \e{$g o f:S\to U$} given by \e{$(g o f)(s)=g(f(s))$}. \end{D}
+\begin{D} Let \e{$S$} be a set. The \dw{identity funciton} on S is the function \e{$id_s: S\to S$} given by \e{$id_s(s)=s$}. \end{D}
+\begin{D} Let \e{$f:S\to T$} be a function. The \dw{inverse function} to \e{$f:S\to T$} is a function \e{$g:T\to S$} s.t. \e{$g o f= id_s$} and \e{$fog - id_T$} \end{D}
+
+
+\begin{T} Let \e{$f:S\to T$} be a funciton. \begin{compactitem}
+\item An \d{inverse function} to \e{$f$} exists iff \e{$f$} is bijective.
+\item If an \d{inverse funciton} to \e{$f$} exists then it is unique.
+\end{compactitem}
+\end{T}
+
+\subsection{L5: Rings and Fields}
+\begin{D} An \dw{group} is a set \e{$A$} with a funciton (addition) \begin{compactitem}
+\item \e{$A\times A \to A$}
+\item \e{$(a,b) \to a+b$}
+\end{compactitem} s.t.
+\begin{compactitem} 
+\item If \e{$a_1,a_2,a_3 \in A$} then \e{$(a_1+a_2)+a_3 = a_1+(a_2+a_3)$} (the associative property),
+\item \e{$\exists 0\in A$} s.t. if \e{$a\in A$} then \e{$0+a=a$} and \e{$a+0=a$} (additive identity exists),
+\item If \e{$a\in A$} then \e{$\exists -a \in A$} s.t. \e{$a+(-a)=0$} and \e{$(-a)+a=0$} (the additive inverse exists)
+\end{compactitem}
+\end{D}
+
+\begin{D} An \dw{abelian group} is a group with commutivity \end{D}
+
+\begin{D} A \dw{ring} is a \emph{abelian group} \e{$R$} with a function (multiplication) \begin{compactitem}
+\item \e{$R\times R \to R$} 
+\item \e{$(a,b) \mapsto ab$}
+\end{compactitem} s.t.
+\begin{compactitem}
+\item If \e{$r_1,r_2,r_3\in R$} then \e{$(r_1r_2)r_3 = r_1(r_2r_3)$},
+\item there exists \e{$I\in R$} s.t. if \e{$r\in R$} then \e{$r\cdot I=r$} and \e{$I\cdot r = r$},
+\item If \e{$r_1, r_2, r_3\in R$} then \e{$r_1(r_2+r_3)=r_1r_2+r_1r_3$} and \e{$(r_1+r_2)r_3=r_1r_3+r_2r_3$} (the \dw{dstribtuion properties}).
+\end{compactitem}
+
+\begin{D} A \dw{copmmutative ring} is a \emph{ring} \e{$r$} s.t. \begin{compactitem}
+\item if \e{$r_1,r_2 \in R$} then \e{$r_1r_2= r_2r_1$}
+\end{compactitem}
+\end{D}
+
+\begin{D} A \dw{field} is a \emph{commutative ring} \e{$F$} s.t. \begin{compactitem}
+\item If \e{$r\in R$} and \e{$r\not= D$} then \e{$\exists r^{-1}\in F} s.t. \e{$r\cdot r^{-1} = 1, r^{-1}\cdot r=1$} \end{compactitem}
+
+\end{D}
+
+
+\subsection{L6: gcd and Euclids algorithm}
+\begin{D} We define the number system of the polynomials to be \e{$\mathbb{F}[t]$}. let \e{$\mathbb{F}$} be a field, then \e{$\mathbb{F}[t] = \{a_0+a_1t+a_2t^2+\cdots,\s.t.\ a_i\in \mathbb{F}, \text{ a finite number of } a_i \text{ is zero }$}. \end{D}
+
+\begin{D} Let \e{$d \in\mathbb{F}
