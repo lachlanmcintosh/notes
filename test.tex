@@ -1,0 +1,27 @@
+\documentclass[10pt]{article}
+\begin{document}
+\begin{quote}
+\textbf{Problem:} Show that, if $n$ is a positive integer, then
+\[ \sum_{i=1}^{n} i^2 = \frac{n(n+1)(2n+1)}{6}\]
+\end{quote}
+\textbf{Proof:
+} The proof will be by induction. Let $P(n)$ be the statement
+\[ \sum_{i=1}^{n} i^2 = \frac{n(n+1)(2n+1)}{6}.\]
+Since $\sum_{i=1}^1 i^2 = 1 = \frac{1\cdot2\cdot 3}{6}$, $P(1)$ is true.
+Assume, by induction, that $P(k)$ is true for some $k > 0$. Then,
+by the associative law
+of addition and the inductive assumption,
+\[
+\sum_{i=1}^{k+1} i^2 = \left(\sum_{i=1}^{k} i^2\right) + (k+1)^2
+= \frac{k(k+1)(2k+1)}{6} + (k+1)^2. \]
+By finding a common denominator and simplifying,
+\[ \frac{k(k+1)(2k+1)}{6} + (k+1)^2 = \frac{k(k+1)(2k+1)}{6}+
+\frac{6(k+1)^2}{6} = \frac{(k+1)[(2k^2+k)+(6k+6)]}{6}\]
+Since $(2k^2+k)+(6k+2) = 2k^2 + 7k + 6 = (k+2)(2k+3) = [(k+1)+1][2(k+1)+1]$,
+we have that
+\[ \frac{k(k+1)(2k+1)}{6} + (k+1)^2 = \frac{(k+1)[(k+1)+1][2(k+1)+1]}{6}.\]
+That is, $P(k+1)$ is true.
+Therefore, since $P(1)$ is true and for $k > 0$, the truth of $P(k)$ implies the
+truth of $P(k+1)$, the Principle of Mathematical
+Induction implies that $P(n)$ is true for all $n > 0$. Q.E.D.
+\end{document}
